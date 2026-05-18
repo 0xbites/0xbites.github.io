@@ -10,6 +10,19 @@ Professional certifications, awards, and recognitions that validate my expertise
 ## Certifications
 
 <div class="cert-item">
+  <img src="/assets/img/badges/tcm-pnpt-badge.png" alt="PNPT Badge" class="badge-img">
+  <div class="cert-content">
+    <h3>Practical Network Penetration Tester (PNPT)</h3>
+    <p><strong>Issuer:</strong> TCM Security</p>
+    <p><strong>Issued:</strong> April 2026</p>
+    <p><strong>Credential ID:</strong> <code>179634231</code></p>
+    <a href="https://certified.tcm-sec.com/5e30d1aa-7c7f-45c3-b829-c5e9b361bc64" target="_blank" rel="noopener" class="btn-verify">Verify Credential</a>
+  </div>
+</div>
+
+---
+
+<div class="cert-item">
   <img src="/assets/img/badges/tcm-pjpt-badge.png" alt="PJPT Badge" class="badge-img">
   <div class="cert-content">
     <h3>Practical Junior Penetration Tester (PJPT)</h3>
