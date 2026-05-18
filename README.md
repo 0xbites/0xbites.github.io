@@ -16,12 +16,21 @@ Personal portfolio and tech blog built with Jekyll and Chirpy theme.
 
 ## Run Locally
 
-```bash
-bundle install
-bundle exec jekyll serve
-```
+1. Install dependencies:
+   ```bash
+   bundle install
+   ```
+2. Start the Jekyll server:
+   ```bash
+   bundle exec jekyll serve
+   ```
 
-Then open `http://localhost:4000`
+> **Note:** If `bundle` is not found, you may need to use its full path or add your Gem bin directory to your PATH:
+> ```bash
+> $(gem env user_gembin)/bundle exec jekyll serve
+> ```
+
+Then open `http://127.0.0.1:4000`
 
 ---
 
