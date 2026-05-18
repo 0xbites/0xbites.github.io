@@ -8,6 +8,14 @@
   icon: "fab fa-linkedin"
   url: "https://www.linkedin.com/in/jahid-hsn/"
 
+- type: htb
+  icon: "fas fa-cube"
+  url: "https://profile.hackthebox.com/profile/019d8421-1511-7303-9740-ed579d405d96"
+
+- type: cylab
+  icon: "fas fa-graduation-cap"
+  url: "https://learn.cylabacademy.org/users/X067"
+
 - type: email
   icon: "fas fa-envelope"
   noblank: true

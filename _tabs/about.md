@@ -41,6 +41,8 @@ With a background in both development and security, I work on creating robust ap
 - **Email**: [jahidhasan1893@gmail.com](mailto:jahidhasan1893@gmail.com)
 - **GitHub**: [github.com/0xbites](https://github.com/0xbites)
 - **LinkedIn**: [linkedin.com/in/jahid-hsn](https://www.linkedin.com/in/jahid-hsn/)
+- **Hack The Box**: [HTB Profile](https://profile.hackthebox.com/profile/019d8421-1511-7303-9740-ed579d405d96)
+- **CyLab Academy**: [CyLab Profile](https://learn.cylabacademy.org/users/X067)
 
 [Download Resume](/assets/files/Jahid_Hasan_CV.pdf){: .btn-download target="_blank" rel="noopener" }
 
