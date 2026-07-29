@@ -23,7 +23,7 @@ With a background in both development and security, I work on creating robust ap
 ## Education
 
 **B.Sc. in Computer Science & Engineering**  
-*Shahjalal University of Science and Technology (SUST) | 2021 - 2025*
+*Shahjalal University of Science and Technology (SUST) | 2020 - 2025*
 
 ---
 
