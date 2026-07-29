@@ -7,7 +7,7 @@ tags: [linux, privilege-escalation, penetration-testing, suid, sudo, capabilitie
 description: Linux privilege escalation techniques — SUID, sudo, kernel exploits, containers, and automated tools.
 image:
   path: /assets/img/posts/linux-privilege-escalation/cover.png
-  alt:
+  alt: Linux privilege escalation cheatsheet cover
 toc: true
 ---
 

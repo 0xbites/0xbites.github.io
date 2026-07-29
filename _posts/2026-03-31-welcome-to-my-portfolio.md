@@ -6,7 +6,7 @@ categories: [General]
 tags: [welcome, introduction]
 image:
   path: /assets/img/posts/welcome-to-my-portfolio/cover.png
-  alt: 
+  alt: Welcome to my portfolio cover
 ---
 
 Hello World! welcome to my portfolio site.
