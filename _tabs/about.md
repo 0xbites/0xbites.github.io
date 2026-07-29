@@ -44,7 +44,7 @@ With a background in both development and security, I work on creating robust ap
 - **Hack The Box**: [HTB Profile](https://profile.hackthebox.com/profile/019d8421-1511-7303-9740-ed579d405d96)
 - **CyLab Academy**: [CyLab Profile](https://learn.cylabacademy.org/users/X067)
 
-[Download Resume](/assets/files/Jahid_Hasan_CV.pdf){: .btn-download target="_blank" rel="noopener" }
+{% comment %}[Download Resume](/assets/files/Jahid_Hasan_CV.pdf){: .btn-download target="_blank" rel="noopener" }{% endcomment %}
 
 <style>
   .btn-download {
