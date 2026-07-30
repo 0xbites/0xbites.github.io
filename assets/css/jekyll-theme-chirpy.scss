@@ -1,0 +1,435 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}'
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* Font stacks used only for print (locally-available families, no webfonts). */
+$print-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+$print-serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', 'Times New Roman', serif;
+$print-mono: 'SFMono-Regular', 'Cascadia Mono', 'JetBrains Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+/* The print-only "Contents" and source-URL line are built by JS
+   (see post-sharing.html); keep them out of the on-screen layout entirely. */
+#print-toc,
+#print-source {
+  display: none;
+}
+
+/* ---- Print styles ----
+ * Applied for both the print button and the browser's native Ctrl/Cmd+P.
+ * Strips site chrome, reclaims full width, and lays the post out as a clean
+ * document: serif body, sans-serif headings, monospace (monochrome) code. */
+@media print {
+  @page {
+    margin: 16mm 15mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #1a1a1a !important;
+    font-family: $print-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.55 !important;
+    width: 100% !important;
+  }
+
+  /* Sans-serif for structural / UI text */
+  article > header h1,
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4,
+  .content h5,
+  .content h6,
+  #print-toc,
+  #print-source,
+  .post-meta,
+  table {
+    font-family: $print-sans !important;
+  }
+
+  /* Monospace for code */
+  pre,
+  code,
+  kbd,
+  samp,
+  .highlight,
+  .rouge-code {
+    font-family: $print-mono !important;
+  }
+
+  /* Hide site chrome and interactive-only elements */
+  #sidebar,
+  #topbar-wrapper,
+  #panel-wrapper,
+  #tail-wrapper,
+  #back-to-top,
+  #search-result-wrapper,
+  #mask,
+  #notification,
+  #comments,
+  .giscus,
+  .share-wrapper,
+  #print-post,
+  #toc-bar,
+  #toc-solo-trigger,
+  #toc-popup,
+  .post-edit,
+  .post-tail-wrapper,
+  .code-header,
+  .content .anchor,
+  figcaption,
+  .post-meta > span,
+  .post-meta span:has(#pageviews) {
+    display: none !important;
+  }
+
+  /* Reclaim the space left by the hidden sidebar/panel */
+  #main-wrapper,
+  #main-wrapper > .container,
+  .row {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  main {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+
+  /* ---------- Masthead ---------- */
+  article > header {
+    border-bottom: 2px solid #222;
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  article > header h1 {
+    font-size: 21pt !important;
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #111 !important;
+    margin: 0 0 0.35rem;
+  }
+
+  .post-desc {
+    font-family: $print-serif !important;
+    font-size: 11.5pt !important;
+    font-style: italic;
+    line-height: 1.4;
+    color: #555 !important;
+    margin: 0 0 0.5rem;
+  }
+
+  .post-meta,
+  .post-meta a {
+    color: #666 !important;
+    font-size: 8.5pt !important;
+  }
+
+  article > header img,
+  .post-meta .preview-img {
+    display: block;
+    max-width: 100% !important;
+    max-height: 6.5cm;
+    width: auto;
+    height: auto !important;
+    margin: 0.7rem auto;
+  }
+
+  /* Canonical URL shown at the top (added by JS) */
+  #print-source {
+    display: block;
+    margin: 0.5rem 0 0;
+    font-size: 8pt !important;
+    color: #777 !important;
+    word-break: break-all;
+  }
+
+  #print-source::before {
+    content: 'Source: ';
+    color: #999 !important;
+  }
+
+  /* ---------- Generated "Contents" ---------- */
+  #print-toc {
+    display: block;
+    margin: 0 0 1.3rem;
+    padding: 0 0 0.9rem;
+    border-bottom: 1px solid #ccc;
+    break-inside: avoid;
+  }
+
+  #print-toc .print-toc-title {
+    font-size: 11.5pt !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #333 !important;
+    margin: 0 0 0.5rem;
+  }
+
+  #print-toc ul {
+    columns: 2;
+    column-gap: 1.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 9pt !important;
+    line-height: 1.45;
+  }
+
+  #print-toc li {
+    break-inside: avoid;
+    margin-bottom: 0.1rem;
+  }
+
+  #print-toc li a {
+    text-decoration: none;
+  }
+
+  #print-toc .print-toc-h1 {
+    margin-top: 0.35rem;
+    font-weight: 700;
+  }
+
+  #print-toc .print-toc-h1 a {
+    color: #000 !important;
+  }
+
+  #print-toc .print-toc-h2 {
+    padding-left: 0.75rem;
+  }
+
+  #print-toc .print-toc-h2 a {
+    color: #333 !important;
+  }
+
+  #print-toc .print-toc-h3 {
+    padding-left: 1.5rem;
+  }
+
+  #print-toc .print-toc-h3 a {
+    color: #555 !important;
+  }
+
+  /* ---------- Content headings ---------- */
+  .content h1,
+  .content h2,
+  .content h3,
+  .content h4 {
+    color: #111 !important;
+    font-weight: 700;
+    line-height: 1.25;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .content h1 {
+    font-size: 15pt !important;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.2rem;
+    margin: 1.5rem 0 0.55rem;
+  }
+
+  .content h2 {
+    font-size: 12.5pt !important;
+    margin: 1.1rem 0 0.4rem;
+  }
+
+  .content h3 {
+    font-size: 11pt !important;
+    margin: 0.9rem 0 0.25rem;
+  }
+
+  .content h4 {
+    font-size: 10.5pt !important;
+    margin: 0.8rem 0 0.2rem;
+  }
+
+  .content > :first-child,
+  .content h1:first-child {
+    margin-top: 0;
+  }
+
+  /* ---------- Body copy ---------- */
+  .content p {
+    margin: 0 0 0.6rem;
+  }
+
+  .content ul,
+  .content ol {
+    margin: 0 0 0.6rem;
+    padding-left: 1.3rem;
+  }
+
+  .content li {
+    margin-bottom: 0.2rem;
+  }
+
+  .content li > ul,
+  .content li > ol {
+    margin-top: 0.2rem;
+    margin-bottom: 0;
+  }
+
+  .content p,
+  .content li {
+    orphans: 3;
+    widows: 3;
+  }
+
+  a {
+    color: #000 !important;
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+  }
+
+  /* ---------- Images ---------- */
+  .shimmer::before {
+    display: none !important;
+    animation: none !important;
+  }
+
+  .blur,
+  img {
+    filter: none !important;
+  }
+
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .content img {
+    display: block;
+    margin: 0.7rem auto;
+  }
+
+  /* ---------- Inline code ---------- */
+  .content code:not(pre code) {
+    font-size: 8.8pt !important;
+    background: #f4f4f4 !important;
+    border: 1px solid #e5e5e5 !important;
+    border-radius: 3px;
+    padding: 0.05em 0.3em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------- Code blocks ----------
+     Drop the line-number gutter and copy header, render as monochrome dark
+     text on a light panel (so it prints cleanly from either theme), and wrap
+     long lines. Long blocks may break across pages rather than overflow. */
+  td.rouge-gutter,
+  .rouge-gutter {
+    display: none !important;
+  }
+
+  .rouge-table,
+  .rouge-table td {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .highlighter-rouge {
+    background: transparent !important;
+    border: 0 !important;
+    margin: 0.7rem 0 !important;
+    padding: 0 !important;
+  }
+
+  div.highlight {
+    background: #f6f8fa !important;
+    border: 1px solid #dcdcdc !important;
+    border-radius: 4px;
+    padding: 0.5rem 0.7rem !important;
+    margin: 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  div.highlight *,
+  pre,
+  pre * {
+    color: #1f2328 !important;
+    background: transparent !important;
+    text-shadow: none !important;
+  }
+
+  .rouge-code pre,
+  div.highlight pre,
+  pre {
+    font-size: 8.5pt !important;
+    line-height: 1.5 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow: visible !important;
+    margin: 0 !important;
+  }
+
+  /* ---------- Blockquotes / callouts ---------- */
+  blockquote {
+    border-left: 3px solid #ccc !important;
+    padding: 0.1rem 0 0.1rem 0.8rem !important;
+    margin: 0.6rem 0 !important;
+    color: #444 !important;
+    font-style: italic;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrapper {
+    overflow: visible !important;
+  }
+
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 9.5pt !important;
+    margin: 0.6rem 0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  th,
+  td {
+    border: 1px solid #ccc !important;
+    padding: 0.25rem 0.45rem !important;
+  }
+
+  thead th {
+    background: #f0f0f0 !important;
+  }
+
+  /* ---------- Page-break behaviour ---------- */
+  tr,
+  img,
+  figure {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
