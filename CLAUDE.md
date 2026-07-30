@@ -19,8 +19,8 @@ If `bundle` isn't on PATH, use `$(gem env user_gembin)/bundle ...`.
 
 - **Deploy is a custom Actions workflow, not GitHub's default Pages build.** It runs the same `jekyll b` + `htmlproofer` as `tools/test.sh`, so a green `tools/test.sh` locally is the real pre-push check.
 - **`last_modified_at` is derived from git history**, not front matter — `_plugins/posts-lastmod-hook.rb` reads `git log` for each post. This needs full history (CI uses `fetch-depth: 0`); a shallow clone silently drops lastmod dates.
-- **Ruby version mismatch is expected:** local `.ruby-version` pins **3.3.12**, CI (`pages-deploy.yml`) uses **3.4**. Match CI when reproducing build issues.
-- **`assets/lib` is a git submodule** (chirpy-static-assets) but CI does **not** initialize it (the `submodules: true` line is commented out), so the deployed site uses the theme's default asset source, not the submodule.
+- **Ruby version is unpinned and mismatched:** there is no `.ruby-version` file, so local Ruby is whatever is on PATH (currently **3.2.3**, and `vendor/bundle/ruby/3.2.0/` was installed against it) while CI (`pages-deploy.yml`) uses **3.4**. Match CI when reproducing build issues.
+- **`assets/lib` is a git submodule** (chirpy-static-assets, see `.gitmodules`) but CI does **not** initialize it — the `actions/checkout` step has no `submodules:` key — so the deployed site uses the theme's default asset source, not the submodule.
 - `_config.yml` `exclude:` drops `tools/`, `README.md`, `LICENSE`, and config JS from the build — files there are not published.
 
 ## Content conventions
