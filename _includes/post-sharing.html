@@ -1,0 +1,154 @@
+<!-- Post sharing snippet -->
+
+<div class="share-wrapper d-flex align-items-center">
+  <span class="share-label text-muted">{{ site.data.locales[include.lang].post.share }}</span>
+  <span class="share-icons">
+    {% capture title %}{{ page.title }} - {{ site.title }}{% endcapture %}
+    {% assign title = title | uri_escape %}
+    {% assign url = page.url | absolute_url | url_encode %}
+
+    {% for share in site.data.share.platforms -%}
+      {%- capture tooltip -%}
+        data-bs-toggle="tooltip" data-bs-placement="top" title="{{ share.type }}" aria-label="{{ share.type }}"
+      {%- endcapture -%}
+
+      {% if share.type == 'Mastodon' %}
+        <script defer type="module" src="https://cdn.jsdelivr.net/npm/@justinribeiro/share-to-mastodon/+esm"></script>
+        <button class="btn text-start" {{ tooltip }}>
+          <share-to-mastodon
+            class="share-mastodon"
+            message="{{ title }}"
+            url="{{ url }}"
+            {%- if share.instances -%}
+              customInstanceList="{{ share.instances | jsonify | xml_escape }}"
+            {%- endif %}
+          >
+            <i class="fa-fw {{ share.icon }}"></i>
+          </share-to-mastodon>
+        </button>
+
+        {% continue %}
+      {% endif %}
+
+      {% assign link = share.link | replace: 'TITLE', title | replace: 'URL', url %}
+
+      <a href="{{ link }}" target="_blank" rel="noopener" {{ tooltip }}>
+        <i class="fa-fw {{ share.icon }}"></i>
+      </a>
+    {% endfor %}
+
+    <button
+      id="copy-link"
+      aria-label="Copy link"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="{{ site.data.locales[include.lang].post.button.share_link.title }}"
+      data-title-succeed="{{ site.data.locales[include.lang].post.button.share_link.succeed }}"
+    >
+      <i class="fa-fw fas fa-link pe-none fs-6"></i>
+    </button>
+
+    <button
+      id="print-post"
+      type="button"
+      aria-label="Print this post"
+      class="btn small"
+      data-bs-toggle="tooltip"
+      data-bs-placement="top"
+      title="Print"
+    >
+      <i class="fa-fw fas fa-print pe-none fs-6"></i>
+    </button>
+  </span>
+</div>
+
+<script>
+  (function () {
+    /* Force-load lazy / LQIP images so they appear in the printout.
+       Only flips attributes — no network waiting, so no added delay. */
+    function prepareImages() {
+      document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+        img.loading = 'eager';
+      });
+      document.querySelectorAll('img[data-src]').forEach(function (img) {
+        var real = img.getAttribute('data-src');
+        if (real && img.getAttribute('src') !== real) {
+          img.src = real;
+        }
+      });
+    }
+
+    /* Build a print-only "Contents" from the post's own headings, so it
+       works regardless of viewport width or the JS sidebar TOC state. */
+    function buildPrintToc() {
+      var content = document.querySelector('.content');
+      if (!content) return;
+
+      var existing = document.getElementById('print-toc');
+      if (existing) existing.remove();
+
+      var heads = content.querySelectorAll('h1[id], h2[id], h3[id]');
+      if (!heads.length) return;
+
+      var nav = document.createElement('nav');
+      nav.id = 'print-toc';
+
+      var title = document.createElement('h2');
+      title.className = 'print-toc-title';
+      title.textContent = 'Contents';
+      nav.appendChild(title);
+
+      var ul = document.createElement('ul');
+      heads.forEach(function (el) {
+        var text = (el.textContent || '').trim();
+        if (!text) return;
+        var li = document.createElement('li');
+        li.className = 'print-toc-' + el.tagName.toLowerCase();
+        var a = document.createElement('a');
+        a.href = '#' + el.id;
+        a.textContent = text;
+        li.appendChild(a);
+        ul.appendChild(li);
+      });
+      nav.appendChild(ul);
+
+      content.parentNode.insertBefore(nav, content);
+    }
+
+    /* Put the post's canonical URL at the top so the printout is
+       self-identifying without relying on the browser's URL footer. */
+    function buildPrintSource() {
+      var header = document.querySelector('article > header');
+      if (!header) return;
+
+      var existing = document.getElementById('print-source');
+      if (existing) existing.remove();
+
+      var canonical = document.querySelector('link[rel="canonical"]');
+      var url = canonical ? canonical.href : window.location.href;
+
+      var p = document.createElement('p');
+      p.id = 'print-source';
+      p.textContent = url;
+      header.appendChild(p);
+    }
+
+    /* Runs for both the print button and native Ctrl/Cmd+P via `beforeprint`. */
+    function prepareForPrint() {
+      prepareImages();
+      buildPrintSource();
+      buildPrintToc();
+    }
+
+    window.addEventListener('beforeprint', prepareForPrint);
+
+    var btn = document.getElementById('print-post');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        prepareForPrint();
+        window.print();
+      });
+    }
+  })();
+</script>
