@@ -1,5 +1,5 @@
 ---
-title: "OS Detection Cheatsheet: TTL, Nmap, and Banner Grabbing"
+title: "OS Detection Techniques: TTL, Nmap, and Banner Grabbing"
 description: A practical guide to identifying operating systems through software versions, port analysis, TTL values, and Nmap fingerprinting.
 date: 2026-08-03 00:00:00 +0000
 categories: [Security, Reconnaissance]
